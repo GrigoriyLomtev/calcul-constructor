@@ -8,7 +8,7 @@ function App() {
       <div
         css={{
           // display: 'flex',
-          color: 'hotpink',
+          // color: 'hotpink',
           width: '695px',
           height: '640px',
           background: '#FFFFFF',
