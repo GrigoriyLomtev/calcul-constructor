@@ -1,5 +1,5 @@
 import React from 'react';
-import { boxShadowElement } from '../../styles/constants';
+import { borderRadiusElement, boxShadowElement, marginBottomElement } from '../../styles/constants';
 
 function InputField() {
   return (
@@ -12,9 +12,9 @@ function InputField() {
         fontSize: '36px',
         fontWeight: '800',
         padding: '10px 12px',
+        marginBottom: marginBottomElement,
         boxShadow: boxShadowElement,
-        margin: '20px 0',
-        borderRadius: '4px',
+        borderRadius: borderRadiusElement,
       }}
     >
       {0}

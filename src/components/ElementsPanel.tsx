@@ -7,7 +7,6 @@ import OperatorsArea from './common/OperatorsArea';
 function ElementsPanel() {
   return (
     <div css={{ width: '240px', height: '448px' }}>
-      <div>ElementsPanel:</div>
       <InputField />
       <OperatorsArea />
       <NumbersArea />
