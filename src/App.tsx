@@ -1,34 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import ConstructorPanel from './components/ConstructorPanel';
+import ElementsPanel from './components/ElementsPanel';
+import SwitchBar from './components/SwitchBar';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div css={{ display: 'flex' }}>
+      <div
+        css={{
+          // display: 'flex',
+          // color: 'hotpink',
+          width: '695px',
+          height: '640px',
+          background: '#FFFFFF',
+          margin: '120px auto',
+          padding: '38px 80px 86px 76px',
+        }}
+      >
+        <div css={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <SwitchBar />
+        </div>
+        <div css={{ display: 'flex', marginTop: '30px', justifyContent: 'space-between' }}>
+          <div>
+            <ElementsPanel />
+          </div>
+          <div>
+            <ConstructorPanel />
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
