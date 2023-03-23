@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  blueColor,
   borderRadiusElement,
   boxShadowElement,
   buttonBackground,
@@ -13,6 +14,9 @@ const buttonStyle = {
   background: buttonBackground,
   border: buttonBorder,
   borderRadius: buttonBorderRadius,
+  ' &:hover': {
+    border: `2px solid ${blueColor}`,
+  },
 };
 
 function OperatorsArea() {
@@ -27,10 +31,18 @@ function OperatorsArea() {
         marginBottom: marginBottomElement,
       }}
     >
-      <button css={buttonStyle}>/</button>
-      <button css={buttonStyle}>X</button>
-      <button css={buttonStyle}>-</button>
-      <button css={buttonStyle}>+</button>
+      <button onClick={() => null} css={buttonStyle}>
+        /
+      </button>
+      <button onClick={() => null} css={buttonStyle}>
+        X
+      </button>
+      <button onClick={() => null} css={buttonStyle}>
+        -
+      </button>
+      <button onClick={() => null} css={buttonStyle}>
+        +
+      </button>
     </div>
   );
 }
