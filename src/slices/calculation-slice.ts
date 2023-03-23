@@ -9,6 +9,7 @@ export enum Operation {
 
 const initialState = {
   currentOperation: Operation.Division,
+  isGetFirstValue: false,
   firstValue: '0',
   secondValue: '0',
   fraction: false,
@@ -20,9 +21,10 @@ export const calculationSlice = createSlice({
   reducers: {
     setCurrentOperation: (state, action: PayloadAction<Operation>) => {
       state.currentOperation = action.payload;
+      state.isGetFirstValue = true;
     },
     setFirstValue: (state, action: PayloadAction<string>) => {
-      state.firstValue = action.payload;
+      state.firstValue === '0' ? (state.firstValue = action.payload) : (state.firstValue += action.payload);
     },
     setSecondValue: (state, action: PayloadAction<string>) => {
       state.secondValue = action.payload;
