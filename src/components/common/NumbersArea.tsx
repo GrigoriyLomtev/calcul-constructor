@@ -30,7 +30,9 @@ function NumbersArea() {
   const dispatch = useDispatch();
 
   const buttonAction = (number: string) => {
-    isGetFirstValue ? dispatch(setSecondValue(number)) : dispatch(setFirstValue(number));
+    if (isGetFirstValue) {
+      if (secondValue.length <= 16) dispatch(setSecondValue(number));
+    } else if (firstValue.length <= 16) dispatch(setFirstValue(number));
   };
   return (
     <div

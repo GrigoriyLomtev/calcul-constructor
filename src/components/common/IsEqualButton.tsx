@@ -1,4 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { isEqualOperation, Operation, setFirstValue, setIsGetFirstValue } from '../../slices/calculation-slice';
 import {
   blueColor,
   borderRadiusElement,
@@ -9,6 +12,24 @@ import {
 } from '../../styles/constants';
 
 function IsEqualButton() {
+  const { currentOperation, firstValue, fraction, isGetFirstValue, secondValue } = useTypedSelector(
+    (state) => state.calculation,
+  );
+  const dispatch = useDispatch();
+
+  const equal = () => {
+    const result = () => {
+      if (currentOperation === Operation.Addition) return Number(firstValue) + Number(secondValue);
+      if (currentOperation === Operation.Division) return Number(firstValue) / Number(secondValue);
+      if (currentOperation === Operation.Multiplication) return Number(firstValue) * Number(secondValue);
+      if (currentOperation === Operation.Subtraction) return Number(firstValue) - Number(secondValue);
+      return 0;
+    };
+    dispatch(setIsGetFirstValue(false));
+    dispatch(setFirstValue('0'));
+    dispatch(isEqualOperation(result().toString()));
+  };
+
   return (
     <div
       css={{
@@ -20,6 +41,9 @@ function IsEqualButton() {
       }}
     >
       <button
+        onClick={() => {
+          equal();
+        }}
         css={{
           border: '1px solid green',
           width: '232px',
