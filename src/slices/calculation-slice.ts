@@ -21,20 +21,28 @@ export const calculationSlice = createSlice({
   reducers: {
     setCurrentOperation: (state, action: PayloadAction<Operation>) => {
       state.currentOperation = action.payload;
+      state.secondValue = '0';
       state.isGetFirstValue = true;
     },
     setFirstValue: (state, action: PayloadAction<string>) => {
       state.firstValue === '0' ? (state.firstValue = action.payload) : (state.firstValue += action.payload);
     },
     setSecondValue: (state, action: PayloadAction<string>) => {
-      state.secondValue = action.payload;
+      state.secondValue === '0' ? (state.secondValue = action.payload) : (state.secondValue += action.payload);
     },
     setFraction: (state, action: PayloadAction<boolean>) => {
       state.fraction = action.payload;
     },
+    setIsGetFirstValue: (state, action: PayloadAction<boolean>) => {
+      state.isGetFirstValue = action.payload;
+    },
+    isEqualOperation: (state, action: PayloadAction<string>) => {
+      state.firstValue = action.payload;
+    },
   },
 });
 
-export const { setCurrentOperation, setFirstValue, setSecondValue, setFraction } = calculationSlice.actions;
+export const { setCurrentOperation, setFirstValue, setSecondValue, setFraction, setIsGetFirstValue, isEqualOperation } =
+  calculationSlice.actions;
 
 export default calculationSlice.reducer;

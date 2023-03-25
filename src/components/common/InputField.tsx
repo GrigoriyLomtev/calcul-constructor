@@ -25,7 +25,14 @@ function InputField() {
   };
 
   useEffect(() => {
-    setValue(isGetFirstValue ? secondValue : firstValue);
+    const roundedFirstValue = () => {
+      if (!isGetFirstValue && firstValue.length >= 17) {
+        const firstN = Number(firstValue).toPrecision(13);
+        return firstN.toString();
+      }
+      return firstValue;
+    };
+    setValue(isGetFirstValue ? secondValue : roundedFirstValue());
   }, [firstValue, isGetFirstValue, secondValue]);
 
   return (
