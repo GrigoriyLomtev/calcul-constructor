@@ -51,6 +51,7 @@ function OperatorsArea() {
         dispatch(isEqualOperation(result().toString()));
       }
       console.log('4');
+      console.log('5');
     };
     firstFn();
 
