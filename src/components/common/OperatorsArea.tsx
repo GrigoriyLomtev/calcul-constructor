@@ -35,48 +35,48 @@ function OperatorsArea() {
 
   const dispatch = useDispatch();
 
-  const buttonAction = (operation: Operation) => {
-    console.log('1');
+  const buttonAction = (operation: Operation) => {};
+  // const buttonAction = (operation: Operation) => {
+  //   console.log('1');
 
-    const firstFn = () => {
-      dispatch(setCurrentOperation(operation));
-      console.log('2');
-    };
+  //   const firstFn = () => {
+  //     dispatch(setCurrentOperation(operation));
+  //     console.log('2');
+  //   };
 
-    const secondFn = () => {
-      console.log('3');
-      if (isGetFirstValue) {
-        dispatch(setFirstValue('0'));
-        dispatch(setIsGetFirstValue(false));
-        dispatch(isEqualOperation(result().toString()));
-      }
-      console.log('4');
-      console.log('5');
-    };
-    firstFn();
+  //   const secondFn = () => {
+  //     console.log('3');
+  //     if (isGetFirstValue) {
+  //       dispatch(setFirstValue('0'));
+  //       dispatch(setIsGetFirstValue(false));
+  //       dispatch(isEqualOperation(result().toString()));
+  //     }
+  //     console.log('4');
+  //   };
+  //   firstFn();
 
-    const result = () => {
-      if (operation === Operation.Addition) {
-        console.log(operation);
-        return Number(firstValue) + Number(secondValue);
-      }
-      if (operation === Operation.Division) {
-        console.log(operation);
-        return Number(firstValue) / Number(secondValue);
-      }
-      if (operation === Operation.Multiplication) {
-        console.log(operation);
-        return Number(firstValue) * Number(secondValue);
-      }
-      if (operation === Operation.Subtraction) {
-        console.log(operation);
-        return Number(firstValue) - Number(secondValue);
-      }
-      return 0;
-    };
+  //   const result = () => {
+  //     if (operation === Operation.Addition) {
+  //       console.log(operation);
+  //       return Number(firstValue) + Number(secondValue);
+  //     }
+  //     if (operation === Operation.Division) {
+  //       console.log(operation);
+  //       return Number(firstValue) / Number(secondValue);
+  //     }
+  //     if (operation === Operation.Multiplication) {
+  //       console.log(operation);
+  //       return Number(firstValue) * Number(secondValue);
+  //     }
+  //     if (operation === Operation.Subtraction) {
+  //       console.log(operation);
+  //       return Number(firstValue) - Number(secondValue);
+  //     }
+  //     return 0;
+  //   };
 
-    secondFn();
-  };
+  //   secondFn();
+  // };
 
   return (
     <div
