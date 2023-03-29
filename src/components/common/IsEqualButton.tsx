@@ -1,32 +1,31 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { isEqualOperation, Operation, setFirstValue, setIsGetFirstValue } from '../../slices/calculation-slice';
+import { isEqualOperation, Operation, setIsNewValue, setIsDivideByZero } from '../../slices/calculation-slice';
 import {
   blueColor,
   borderRadiusElement,
   boxShadowElement,
-  buttonBackground,
   buttonBorderRadius,
   marginBottomElement,
 } from '../../styles/constants';
 
 function IsEqualButton() {
-  const { currentOperation, firstValue, fraction, isGetFirstValue, secondValue } = useTypedSelector(
-    (state) => state.calculation,
-  );
+  const { currentOperation, mainValue, localValue } = useTypedSelector((state) => state.calculation);
   const dispatch = useDispatch();
 
   const equal = () => {
     const result = () => {
-      if (currentOperation === Operation.Addition) return Number(firstValue) + Number(secondValue);
-      if (currentOperation === Operation.Division) return Number(firstValue) / Number(secondValue);
-      if (currentOperation === Operation.Multiplication) return Number(firstValue) * Number(secondValue);
-      if (currentOperation === Operation.Subtraction) return Number(firstValue) - Number(secondValue);
+      if (currentOperation === Operation.Division)
+        if (localValue === '0') {
+          dispatch(setIsDivideByZero(true));
+        } else return Number(mainValue) / Number(localValue);
+      if (currentOperation === Operation.Addition) return Number(mainValue) + Number(localValue);
+      if (currentOperation === Operation.Multiplication) return Number(mainValue) * Number(localValue);
+      if (currentOperation === Operation.Subtraction) return Number(mainValue) - Number(localValue);
       return 0;
     };
-    dispatch(setIsGetFirstValue(false));
-    dispatch(setFirstValue('0'));
+    dispatch(setIsNewValue(false));
     dispatch(isEqualOperation(result().toString()));
   };
 

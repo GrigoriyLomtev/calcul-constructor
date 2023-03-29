@@ -16,7 +16,7 @@ const inputFieldStyle = {
 
 function InputField() {
   const [value, setValue] = useState('0');
-  const { firstValue, isGetFirstValue, secondValue } = useTypedSelector((state) => state.calculation);
+  const { mainValue, isNewValue, localValue, isDivideByZero } = useTypedSelector((state) => state.calculation);
 
   const fontSize = (value: string) => {
     if (value.length >= 9 && value.length <= 14) return '24px';
@@ -25,15 +25,15 @@ function InputField() {
   };
 
   useEffect(() => {
-    const roundedFirstValue = () => {
-      if (!isGetFirstValue && firstValue.length >= 17) {
-        const firstN = Number(firstValue).toPrecision(13);
+    const roundedMainValue = () => {
+      if (!isNewValue && mainValue.length >= 17) {
+        const firstN = Number(mainValue).toPrecision(13);
         return firstN.toString();
       }
-      return firstValue;
+      return mainValue;
     };
-    setValue(isGetFirstValue ? secondValue : roundedFirstValue());
-  }, [firstValue, isGetFirstValue, secondValue]);
+    isDivideByZero ? setValue('Не определено') : setValue(isNewValue ? localValue : roundedMainValue());
+  }, [mainValue, isNewValue, localValue]);
 
   return (
     <div css={{ ...inputFieldStyle, fontSize: fontSize(value) }}>

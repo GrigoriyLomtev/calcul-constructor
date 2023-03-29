@@ -1,13 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import {
-  isEqualOperation,
-  Operation,
-  setCurrentOperation,
-  setFirstValue,
-  setIsGetFirstValue,
-} from '../../slices/calculation-slice';
+import { Operation, setCurrentOperation, setIsNewValue } from '../../slices/calculation-slice';
 import {
   blueColor,
   borderRadiusElement,
@@ -29,53 +23,29 @@ const buttonStyle = {
 };
 
 function OperatorsArea() {
-  const { currentOperation, firstValue, fraction, isGetFirstValue, secondValue } = useTypedSelector(
-    (state) => state.calculation,
-  );
+  const { mainValue, localValue } = useTypedSelector((state) => state.calculation);
 
   const dispatch = useDispatch();
 
   const buttonAction = (operation: Operation) => {
-    console.log('1');
-
-    const firstFn = () => {
-      dispatch(setCurrentOperation(operation));
-      console.log('2');
-    };
-
-    const secondFn = () => {
-      console.log('3');
-      if (isGetFirstValue) {
-        dispatch(setFirstValue('0'));
-        dispatch(setIsGetFirstValue(false));
-        dispatch(isEqualOperation(result().toString()));
-      }
-      console.log('4');
-      console.log('5');
-    };
-    firstFn();
-
-    const result = () => {
-      if (operation === Operation.Addition) {
-        console.log(operation);
-        return Number(firstValue) + Number(secondValue);
-      }
-      if (operation === Operation.Division) {
-        console.log(operation);
-        return Number(firstValue) / Number(secondValue);
-      }
-      if (operation === Operation.Multiplication) {
-        console.log(operation);
-        return Number(firstValue) * Number(secondValue);
-      }
-      if (operation === Operation.Subtraction) {
-        console.log(operation);
-        return Number(firstValue) - Number(secondValue);
-      }
-      return 0;
-    };
-
-    secondFn();
+    dispatch(setIsNewValue(true));
+    dispatch(setCurrentOperation(operation));
+    if (operation === Operation.Addition) {
+      console.log(operation);
+      return Number(mainValue) + Number(localValue);
+    }
+    if (operation === Operation.Division) {
+      console.log(operation);
+      return Number(mainValue) / Number(localValue);
+    }
+    if (operation === Operation.Multiplication) {
+      console.log(operation);
+      return Number(mainValue) * Number(localValue);
+    }
+    if (operation === Operation.Subtraction) {
+      console.log(operation);
+      return Number(mainValue) - Number(localValue);
+    } else return 0;
   };
 
   return (

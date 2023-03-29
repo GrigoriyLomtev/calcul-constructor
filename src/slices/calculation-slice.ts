@@ -8,11 +8,11 @@ export enum Operation {
 }
 
 const initialState = {
-  currentOperation: Operation.Division,
-  isGetFirstValue: false,
-  firstValue: '0',
-  secondValue: '0',
-  fraction: false,
+  currentOperation: Operation.Addition,
+  mainValue: '0',
+  localValue: '0',
+  isNewValue: false,
+  isDivideByZero: false,
 };
 
 export const calculationSlice = createSlice({
@@ -21,28 +21,28 @@ export const calculationSlice = createSlice({
   reducers: {
     setCurrentOperation: (state, action: PayloadAction<Operation>) => {
       state.currentOperation = action.payload;
-      state.secondValue = '0';
-      state.isGetFirstValue = true;
+      state.localValue = '0';
+      state.isNewValue = true;
     },
-    setFirstValue: (state, action: PayloadAction<string>) => {
-      state.firstValue === '0' ? (state.firstValue = action.payload) : (state.firstValue += action.payload);
+    setMainValue: (state, action: PayloadAction<string>) => {
+      state.mainValue === '0' ? (state.mainValue = action.payload) : (state.mainValue += action.payload);
     },
-    setSecondValue: (state, action: PayloadAction<string>) => {
-      state.secondValue === '0' ? (state.secondValue = action.payload) : (state.secondValue += action.payload);
+    setLocalValue: (state, action: PayloadAction<string>) => {
+      state.localValue === '0' ? (state.localValue = action.payload) : (state.localValue += action.payload);
     },
-    setFraction: (state, action: PayloadAction<boolean>) => {
-      state.fraction = action.payload;
+    setIsNewValue: (state, action: PayloadAction<boolean>) => {
+      state.isNewValue = action.payload;
     },
-    setIsGetFirstValue: (state, action: PayloadAction<boolean>) => {
-      state.isGetFirstValue = action.payload;
+    setIsDivideByZero: (state, action: PayloadAction<boolean>) => {
+      state.isDivideByZero = action.payload;
     },
     isEqualOperation: (state, action: PayloadAction<string>) => {
-      state.firstValue = action.payload;
+      state.mainValue = action.payload;
     },
   },
 });
 
-export const { setCurrentOperation, setFirstValue, setSecondValue, setFraction, setIsGetFirstValue, isEqualOperation } =
+export const { setCurrentOperation, setMainValue, setLocalValue, setIsNewValue, setIsDivideByZero, isEqualOperation } =
   calculationSlice.actions;
 
 export default calculationSlice.reducer;
