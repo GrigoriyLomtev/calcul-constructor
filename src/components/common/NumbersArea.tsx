@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { setFirstValue, setSecondValue } from '../../slices/calculation-slice';
+import { setMainValue, setLocalValue, setIsDivideByZero } from '../../slices/calculation-slice';
 import {
   blueColor,
   borderRadiusElement,
@@ -23,17 +23,32 @@ const buttonStyle = {
 };
 
 function NumbersArea() {
-  const { currentOperation, firstValue, fraction, isGetFirstValue, secondValue } = useTypedSelector(
-    (state) => state.calculation,
-  );
+  const { mainValue, isNewValue, localValue, isDivideByZero } = useTypedSelector((state) => state.calculation);
 
   const dispatch = useDispatch();
 
-  const buttonAction = (number: string) => {
-    if (isGetFirstValue) {
-      if (secondValue.length <= 16) dispatch(setSecondValue(number));
-    } else if (firstValue.length <= 16) dispatch(setFirstValue(number));
+  const isDecimalSet = () => {
+    if (isNewValue) {
+      if (localValue.indexOf('.') !== -1) return true;
+    }
+    if (!isNewValue) {
+      if (mainValue.indexOf('.') !== -1) return true;
+    }
+    return false;
   };
+
+  const buttonAction = (number: string) => {
+    if (isDivideByZero) {
+      dispatch(setIsDivideByZero(false));
+    }
+    if (number === '.' && isDecimalSet()) {
+      return;
+    }
+    if (isNewValue) {
+      if (localValue.length <= 16) dispatch(setLocalValue(number));
+    } else if (mainValue.length <= 16) dispatch(setMainValue(number));
+  };
+
   return (
     <div
       css={{
@@ -126,7 +141,14 @@ function NumbersArea() {
       >
         0
       </button>
-      <button css={buttonStyle}>,</button>
+      <button
+        onClick={() => {
+          buttonAction('.');
+        }}
+        css={buttonStyle}
+      >
+        ,
+      </button>
     </div>
   );
 }
